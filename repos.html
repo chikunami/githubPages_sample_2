@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>GitHubリポジトリ一覧</title>
+    <script>
+        async function fetchRepos() {
+          const response = await fetch("https://api.github.com/users/chikunami/repos");
+          const repos = await response.json();
+          const list = document.getElementById("repo-list");
+          repos.forEach(repo => {
+            const item = document.createElement("li");
+            item.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>`;
+            list.appendChild(item);
+          });
+        }
+        window.onload = fetchRepos;
+    </script>
+</head>
+<body>
+<h1>GitHubリポジトリ一覧</h1>
+<ul id="repo-list"></ul>
+</body>
+</html>
